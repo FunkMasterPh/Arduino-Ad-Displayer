@@ -5,21 +5,21 @@ using namespace std;
 
 class Ad{
     public:
-        char* name;
-        char* message;
+        string name;
+        string message;
         int paid;
 
 
-    Ad(char* _name, char* _message, int _paid){
+    Ad(string _name, string _message, int _paid){
         name = _name;
         message = _message;
         paid = _paid;
     }
-    char* getMsg(){
+    string getMsg(){
         return message;
     }
 
-    char* getName(){
+    string getName(){
         return name;
     }
     

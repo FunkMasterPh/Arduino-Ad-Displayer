@@ -2,7 +2,7 @@
 #define TIME_DISTRIBUTION_H
 #include "ad_class.hpp"
 
-int timeDist(Ad& obj1, Ad& obj2){
+int timeDist(vector<Ad>& newAdList){
     int totalSum;
     int cps;
     totalSum = obj1.getPaid() + obj2.getPaid();
