@@ -1,3 +1,5 @@
+#ifndef AD_CLASS_H
+#define AD_CLASS_H
 #include <iostream>
 using namespace std;
 
@@ -16,7 +18,17 @@ class Ad{
     char* getMsg(){
         return message;
     }
+
+    char* getName(){
+        return name;
+    }
+    
+    int getPaid(){
+        return paid;
+    }
     ~Ad(){
         cout << "Calling destructor" << endl;
     }
 };
+
+#endif
