@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int serial_port = open("/dev/cu.usbmodem1442201", O_RDWR);
+// int serial_port = open("/dev/cu.usbmodem1442201", O_RDWR);
 
 void fillVector(vector<Ad>&);
 void printVector(vector<Ad>&);
@@ -34,9 +34,8 @@ void fillVector(vector<Ad>& newAdList){
     Ad newAd(name, msg, paid);
     newAdList.push_back(newAd);
 
-
-
 }
+
 void printVector(vector<Ad>& newAdList){
     int size = newAdList.size();
 
@@ -46,18 +45,48 @@ void printVector(vector<Ad>& newAdList){
     }
 }
 
-int main(){
+int main(int argc, char **argv){
+    int serial_port;
+
+    if (argc < 2) {
+        cout << "Not enough arguments." << endl;
+        return -1;
+    }
+    serial_port = open(argv[1], O_RDWR);
+    
     if(serial_port < 0){
-        cout << "Failed" << errno << " "<< strerror(errno) << endl;
+        cout << "Failed to connect to " << argv[1] << errno 
+        << " - "<< strerror(errno) << endl;
+        return -1;
     }else{
         cout << "Success" << endl;
     }
     vector<Ad> adList;
     while(1){
-        fillVector(adList);
-        printVector(adList);
 
+        int choice;
+        cout << "**************************" << endl;
+        cout << "* 1) Add advertisement    " << endl;
+        cout << "* 2) List advertisements  " << endl;
+        cout << "* 3) Calculate time dist  " << endl;
+        cout << "**************************" << endl;
 
+        cin >> choice;
+
+        switch(choice){
+            case 1:
+                fillVector(adList);
+                break;
+            case 2: 
+                printVector(adList);
+                break;
+            case 3: 
+                timeDist(adList);
+                break;
+            default:
+                break;
+
+        }
     }
     return 0;
 }
