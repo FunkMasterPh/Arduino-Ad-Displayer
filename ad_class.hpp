@@ -1,6 +1,8 @@
 #ifndef AD_CLASS_H
 #define AD_CLASS_H
+
 #include <iostream>
+
 using namespace std;
 
 class Ad{
