@@ -34,9 +34,8 @@ void fillVector(vector<Ad>& newAdList){
     Ad newAd(name, msg, paid);
     newAdList.push_back(newAd);
 
-
-
 }
+
 void printVector(vector<Ad>& newAdList){
     int size = newAdList.size();
 
@@ -64,10 +63,30 @@ int main(int argc, char **argv){
     }
     vector<Ad> adList;
     while(1){
-        fillVector(adList);
-        printVector(adList);
 
+        int choice;
+        cout << "**************************" << endl;
+        cout << "* 1) Add advertisement    " << endl;
+        cout << "* 2) List advertisements  " << endl;
+        cout << "* 3) Calculate time dist  " << endl;
+        cout << "**************************" << endl;
 
+        cin >> choice;
+
+        switch(choice){
+            case 1:
+                fillVector(adList);
+                break;
+            case 2: 
+                printVector(adList);
+                break;
+            case 3: 
+                timeDist(adList);
+                break;
+            default:
+                break;
+
+        }
     }
     return 0;
 }
