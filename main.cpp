@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int serial_port = open("/dev/cu.usbmodem1442201", O_RDWR);
+// int serial_port = open("/dev/cu.usbmodem1442201", O_RDWR);
 
 void fillVector(vector<Ad>&);
 void printVector(vector<Ad>&);
@@ -46,9 +46,19 @@ void printVector(vector<Ad>& newAdList){
     }
 }
 
-int main(){
+int main(int argc, char **argv){
+    int serial_port;
+
+    if (argc < 2) {
+        cout << "Not enough arguments." << endl;
+        return -1;
+    }
+    serial_port = open(argv[1], O_RDWR);
+    
     if(serial_port < 0){
-        cout << "Failed" << errno << " "<< strerror(errno) << endl;
+        cout << "Failed to connect to " << argv[1] << errno 
+        << " - "<< strerror(errno) << endl;
+        return -1;
     }else{
         cout << "Success" << endl;
     }
