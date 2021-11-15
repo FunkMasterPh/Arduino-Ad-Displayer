@@ -24,8 +24,12 @@ int main(int argc, char **argv){
     }
     //serial_port = open(argv[1], O_RDWR);
     //string port = argv[1];
-    //ofstream serial_port(argv[1]);
-    
+    ofstream serial_port(argv[1]);
+    if(!serial_port) {
+        cout << "Failed to connect to " << argv[1] << errno 
+        << " - "<< strerror(errno) << endl;
+        return -1; 
+    }
     /*if(serial_port < 0){
         cout << "Failed to connect to " << argv[1] << errno 
         << " - "<< strerror(errno) << endl;
