@@ -7,10 +7,9 @@
 
 using namespace std;
 
-
-int costPerSecond(vector<Ad>& newAdList){
-    int totalSum;
-    int cps; // cost per second
+float costPerSecond(vector<Ad>& newAdList){
+    float totalSum;
+    float cps; // cost per second
     int size = newAdList.size();
 
     cps = calcCost(newAdList);
@@ -35,8 +34,8 @@ int costPerSecond(vector<Ad>& newAdList){
 
 void timeDist(vector<Ad>& newAdList){
     int size = newAdList.size();
-    int cps = costPerSecond(newAdList);
-    int adTime;
+    float cps = costPerSecond(newAdList);
+    float adTime;
 
     for(int i = 0; i < size; i++){
        adTime = newAdList[i].getPaid() / cps;
@@ -44,8 +43,8 @@ void timeDist(vector<Ad>& newAdList){
     }
 }
 
-int calcCost(vector<Ad>& newAdList){
-    int totalSum = 0;
+float calcCost(vector<Ad>& newAdList){
+    float totalSum = 0;
     int size = newAdList.size();
 
     for(int i = 0; i < size; i++) {

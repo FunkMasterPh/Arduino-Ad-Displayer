@@ -4,43 +4,47 @@
 #define LCDWIDTH 16
 #define LCDHEIGHT 2
 
-int Contrast=0;
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2); 
+int Contrast = 0;
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
-void serialFlush(){
-  while(Serial.available() > 0) {
-    char t = Serial.read(); 
+void serialFlush() {
+  while (Serial.available() > 0) {
+    char t = Serial.read();
   }
 }
 
 void setup() {
-  analogWrite(6,Contrast);
+  analogWrite(6, Contrast);
   Serial.begin(9600);
   lcd.begin(16, 2); // initialize with your correct lcd size here
-  
+
 
 }
 
 void loop() {
-  String var1;
-  String var2;
+  String company;
+  String ad;
+  String adTime_str;
+  int adTime;
   lcd.clear();
   while (Serial.available() > 0) {
-    var1 = Serial.readStringUntil(','); // writes in the string all the inputs till a comma
-    Serial.read(); 
-    var2 = Serial.readStringUntil(',');
-    Serial.read(); 
-}
-  String pinnedString = var1;
-  String scrollingString = var2;
-  int pinnedRow = 1;
-  int scrollingRow =  0;
-  int scrollingSpeed = 200;
-  pinAndScrollText(pinnedString, pinnedRow, scrollingString, scrollingRow, scrollingSpeed);
-
-  delay(2000);
-  lcd.clear();
-  lcd.print("Back");
+    company = Serial.readStringUntil(',');
+    //Serial.read();
+    ad = Serial.readStringUntil(',');
+    //Serial.read();
+    adTime_str = Serial.readStringUntil('|');
+    Serial.read();
+    adTime = adTime_str.toInt();
+    Serial.println(adTime);
+    String pinnedString = company;
+    String scrollingString = ad;
+    int pinnedRow = 1;
+    int scrollingRow =  0;
+    int scrollingSpeed = 200;
+    pinAndScrollText(pinnedString, pinnedRow, scrollingString, scrollingRow, scrollingSpeed);
+    delay(1000 * adTime);
+  }
+  
 }
 
 /* This procedure pins a given text in the center of a desired row while scrolling from right to left another given text on another desired row.

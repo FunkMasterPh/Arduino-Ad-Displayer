@@ -3,9 +3,9 @@
 
 #define TIME 60
 
-int costPerSecond(vector<Ad>& newAdList);
+float costPerSecond(vector<Ad>& newAdList);
 void timeDist(vector<Ad>& newAdList);
-int calcCost(vector<Ad>& newAdList);
+float calcCost(vector<Ad>& newAdList);
 
 
 

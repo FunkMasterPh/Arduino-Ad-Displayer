@@ -10,7 +10,7 @@ class Ad{
         string name;
         string message;
         int paid;
-        int adTime = 0;
+        float adTime;
 
     public:
         Ad(string _name, string _message, int _paid){
@@ -29,10 +29,10 @@ class Ad{
         int getPaid(){
             return paid;
         }
-        int getAdTime(){
+        float getAdTime(){
             return adTime;
         }
-        void setAdTime(int _time){
+        void setAdTime(float _time){
             adTime = _time;
         }
         ~Ad(){
