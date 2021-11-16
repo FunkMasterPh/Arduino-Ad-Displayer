@@ -1,52 +1,60 @@
 #include <LiquidCrystal.h>
-#define SERIAL_BUFFER_SIZE 256
+#define MAX_CHARS 250
 
-int Contrast = 0;
-int row = 0;
-int row2 = 1;
-int col = 15;
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+char recChars[MAX_CHARS];
+char temp[MAX_CHARS];
 
-void serialFlush() {
-  while (Serial.available() > 0) {
-    char t = Serial.read();
-  }
-}
+char msg[MAX_CHARS] = {0};
+float adTime = 0.0;
 
-void printToLCD(const String company, const String ad, const float adTime, int row, int row2, int col, unsigned long previousMillis, unsigned long currentMillis){
-  while((currentMillis - previousMillis) < (adTime * 1000)){
-    lcd.setCursor(15,0);
-    lcd.print(ad);
-    lcd.setCursor(15,1);
-    lcd.print(company);
-    lcd.scrollDisplayLeft();
-    delay(225);
-    currentMillis = millis();
-  }
-  lcd.clear();
-}
-
+size_t indx;
 void setup() {
-  analogWrite(6, Contrast);
   Serial.begin(9600);
   lcd.begin(16, 2); 
-
 }
 
 void loop() {
-  String company;
-  String ad;
-  String adTime_str;
-  float adTime;
-  lcd.clear();
-  while (Serial.available() > 0) {
-    company = Serial.readStringUntil(',');
-    ad = Serial.readStringUntil(',');
-    adTime_str = Serial.readStringUntil('|');
-    adTime = adTime_str.toFloat();
-    unsigned long previousMillis = millis();
-    unsigned long currentMillis = millis();
-    printToLCD(company, ad, adTime, row, row2, col, previousMillis, currentMillis);
+  recAds();
+  splitAds();
+}
+
+void recAds(){
+  while(Serial.available() > 0) {
+    indx = Serial.readBytes(recChars, MAX_CHARS);
   }
-  lcd.print("slut");
+}
+
+void splitAds(){
+  int j = 0;
+  for(int i = 0; i < indx; i++){
+    temp[j] = recChars[i];
+    j++;
+    if(recChars[i] == '|'){
+      parseData();
+      j = 0;
+    }
+  }
+}
+
+void parseData(){
+  char* strtokIndx;
+  strtokIndx = strtok(temp, ",");
+  strcpy(msg, strtokIndx);
+  strtokIndx = strtok(NULL, "|");
+  adTime = atof(strtokIndx);
+  unsigned long currMillis = millis();
+  unsigned long prevMillis = millis();
+  printToLCD(currMillis, prevMillis, msg, adTime);
+ }
+
+ void printToLCD(unsigned long currMillis, unsigned long prevMillis, char* msg, float adTime){
+  while((currMillis - prevMillis) < (adTime * 1000.00)){
+    lcd.setCursor(15,0);
+    lcd.print(msg);
+    lcd.scrollDisplayLeft();
+    delay(225);
+    currMillis = millis();
+  }
+  lcd.clear();
 }

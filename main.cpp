@@ -52,10 +52,13 @@ int main(int argc, char **argv){
             case 4:
                 for(int i = 0; i < adList.size(); i++){
                     ofstream serial_port(argv[1]);
-                    serial_port << adList[i].getName() << "," << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
-                    cout << adList[i].getName() << "," << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
+                    serial_port << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
+                    cout << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
                     serial_port.close();
-                }   
+                }
+                /* ofstream serial_port(argv[1]);
+                serial_port << "$";
+                serial_port.close(); */
                 break;
             default:
                 break;
