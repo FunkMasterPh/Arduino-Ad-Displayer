@@ -13,10 +13,8 @@ void fillVector(vector<Ad>& newAdList){
     getline(cin, name);
     cout << "Enter message: " << endl;
     getline(cin, msg);
-    //while((getchar()) != '\n');
     cout << "Add money: " << endl;
     cin >> paid;
-    //while((getchar()) != '\n');
 
     Ad newAd(name, msg, paid);
     newAdList.push_back(newAd);

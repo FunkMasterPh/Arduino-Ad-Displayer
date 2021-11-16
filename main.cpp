@@ -7,12 +7,12 @@
 #include <unistd.h> 
 #include <vector>
 #include <fstream>
+#include "preset_ads.hpp"
 #include "ad_class.hpp"
 #include "time_distribution.hpp"
 #include "ad_functions.hpp"
 
 using namespace std;
-
 
 int main(int argc, char **argv){
 
@@ -26,15 +26,17 @@ int main(int argc, char **argv){
         << " - "<< strerror(errno) << endl;
         return -1; 
     }
-    vector<Ad> adList;
-    while(1){
 
+    vector<Ad> adList;
+
+    while(1){
         int choice;
         cout << "**************************" << endl;
         cout << "* 1) Add advertisement    " << endl;
-        cout << "* 2) List advertisements  " << endl;
-        cout << "* 3) Calculate time dist  " << endl;
-        cout << "* 4) Display Ads          " << endl;
+        cout << "* 2) Add ads from file    " << endl;
+        cout << "* 3) List advertisements  " << endl;
+        cout << "* 4) Calculate time dist  " << endl;
+        cout << "* 5) Display Ads          " << endl;
         cout << "**************************" << endl;
 
         cin >> choice;
@@ -43,28 +45,27 @@ int main(int argc, char **argv){
             case 1:
                 fillVector(adList);
                 break;
-            case 2: 
+            case 2:
+                readFromFile(adList);
+            case 3: 
                 printVector(adList);
                 break;
-            case 3: 
+            case 4: 
                 timeDist(adList);
                 break;
-            case 4:
+            case 5:
                 for(int i = 0; i < adList.size(); i++){
                     ofstream serial_port(argv[1]);
                     serial_port << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
                     cout << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
                     serial_port.close();
+                    sleep(1);
                 }
-                /* ofstream serial_port(argv[1]);
-                serial_port << "$";
-                serial_port.close(); */
                 break;
             default:
                 break;
 
         }
-    }
-    
+    } 
     return 0;
 }
