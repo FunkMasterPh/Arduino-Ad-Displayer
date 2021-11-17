@@ -20,11 +20,13 @@ int main(int argc, char **argv){
         cout << "Not enough arguments." << endl;
         return -1;
     }
-    ofstream serial_port(argv[1]);
-    if(!serial_port) {
-        cout << "Failed to connect to " << argv[1] << errno 
-        << " - "<< strerror(errno) << endl;
-        return -1; 
+    for(int i = 1; i < argc - 1; i++){
+        ofstream serial_port(argv[i]);
+        if(!serial_port) {
+            cout << "Failed to connect to " << argv[i] << errno 
+            << " - "<< strerror(errno) << endl;
+            return -1; 
+        }
     }
 
     vector<Ad> adList;
@@ -38,8 +40,15 @@ int main(int argc, char **argv){
         cout << "* 4) Calculate time dist  " << endl;
         cout << "* 5) Display Ads          " << endl;
         cout << "**************************" << endl;
-
-        cin >> choice;
+        try{
+            cin >> choice;
+            if(choice < 1 || choice > 5){
+                throw (choice);
+            } 
+        }
+        catch(int choice){
+            cout << "Not a valid choice" << endl;
+        }
 
         switch(choice){
             case 1:
@@ -54,12 +63,14 @@ int main(int argc, char **argv){
                 timeDist(adList);
                 break;
             case 5:
-                for(int i = 0; i < adList.size(); i++){
-                    ofstream serial_port(argv[1]);
-                    serial_port << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
-                    cout << adList[i].getMsg() << "," << adList[i].getAdTime() << "|";
-                    serial_port.close();
-                    sleep(1);
+                for(int i = 1; i <= argc - 1; i++){
+                    for(int j = 0; j < adList.size(); j++){
+                        ofstream serial_port(argv[i]);
+                        serial_port << adList[j].getMsg() << "," << adList[j].getAdTime() << "|";
+                        cout << adList[j].getMsg() << "," << adList[j].getAdTime() << "|";
+                        serial_port.close();
+                        sleep(1);
+                    }
                 }
                 break;
             default:
