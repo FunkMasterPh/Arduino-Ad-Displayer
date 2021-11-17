@@ -4,12 +4,14 @@
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 char recChars[MAX_CHARS];
 char temp[MAX_CHARS];
+int Contrast = 0;
 
 char msg[MAX_CHARS] = {0};
 float adTime = 0.0;
 
 size_t indx;
 void setup() {
+  analogWrite(6, Contrast);
   Serial.begin(9600);
   lcd.begin(16, 2); 
 }
@@ -22,6 +24,7 @@ void loop() {
 void recAds(){
   while(Serial.available() > 0) {
     indx = Serial.readBytes(recChars, MAX_CHARS);
+  
   }
 }
 

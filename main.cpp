@@ -11,25 +11,36 @@
 #include "ad_class.hpp"
 #include "time_distribution.hpp"
 #include "ad_functions.hpp"
+#include "serial_port_class.hpp"
 
 using namespace std;
 
 int main(int argc, char **argv){
+    
+    vector<Ad> adList;
+    vector<SerialPort> arduinos;
 
     if (argc < 2) {
         cout << "Not enough arguments." << endl;
         return -1;
     }
-    for(int i = 1; i < argc - 1; i++){
-        ofstream serial_port(argv[i]);
+    ofstream serial_port;
+    for(int i = 1; i < argc; i++) {
+        serial_port.open(argv[i]);
         if(!serial_port) {
-            cout << "Failed to connect to " << argv[i] << errno 
+            cout << "Failed to connect to " << argv[1] << errno 
             << " - "<< strerror(errno) << endl;
             return -1; 
         }
+        serial_port.close();
     }
-
-    vector<Ad> adList;
+    for(int i = 1; i < argc; i++){
+        SerialPort sp(argv[i]);
+        arduinos.push_back(sp);
+    }
+    for(int i = 0; i < arduinos.size(); i++){
+        cout << arduinos[i].getPort() << endl;
+    }
 
     while(1){
         int choice;
@@ -40,15 +51,8 @@ int main(int argc, char **argv){
         cout << "* 4) Calculate time dist  " << endl;
         cout << "* 5) Display Ads          " << endl;
         cout << "**************************" << endl;
-        try{
-            cin >> choice;
-            if(choice < 1 || choice > 5){
-                throw (choice);
-            } 
-        }
-        catch(int choice){
-            cout << "Not a valid choice" << endl;
-        }
+
+        cin >> choice;
 
         switch(choice){
             case 1:
@@ -56,24 +60,22 @@ int main(int argc, char **argv){
                 break;
             case 2:
                 readFromFile(adList);
+                break;
             case 3: 
                 printVector(adList);
                 break;
             case 4: 
                 timeDist(adList);
                 break;
-            case 5:
-                for(int i = 1; i <= argc - 1; i++){
-                    for(int j = 0; j < adList.size(); j++){
-                        ofstream serial_port(argv[i]);
-                        serial_port << adList[j].getMsg() << "," << adList[j].getAdTime() << "|";
-                        cout << adList[j].getMsg() << "," << adList[j].getAdTime() << "|";
-                        serial_port.close();
-                        sleep(1);
-                    }
-                }
+            case 5:{
+                int ardSize = arduinos.size();
+                for(int i = 0; i < ardSize; i++)
+                    
+                    arduinos[i].sendAd(adList);
                 break;
+            }     
             default:
+                cout << "Invalid input." << endl;
                 break;
 
         }

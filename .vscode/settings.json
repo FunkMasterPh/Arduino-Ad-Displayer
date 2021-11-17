@@ -7,6 +7,7 @@
         "string": "cpp",
         "fstream": "cpp",
         "ios": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "random": "cpp"
     }
 }

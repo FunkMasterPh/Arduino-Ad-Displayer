@@ -1,0 +1,9 @@
+flytta över kod från class.hpp till class.cpp
+
+error-handling 
+
+ta in fil som arg i compile-time
+
+göra funktioner av kod i main 
+
+i mån av tid, få till threads
