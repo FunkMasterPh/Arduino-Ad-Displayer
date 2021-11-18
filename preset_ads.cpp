@@ -7,32 +7,39 @@
 
 using namespace std;
 
-int readFromFile(vector<Ad>& newAdList){
+int readFromFile(vector<Ad>& newAdList, string file){
     string cmpName;
     string msg;
     string paid;
     int paidInt;
     fstream presetAds;
-    presetAds.open("preset_ads.txt", ios::in);
+    presetAds.open(file, ios::in);
         if(!presetAds){
+            presetAds.close();
             return -1;
         }
     while(!presetAds.eof()){
         getline(presetAds, cmpName);
         if(!cmpName.empty())
             getline(presetAds, msg);
-        else 
+        else{
+            presetAds.close(); 
             return -1;
+        }
         if(!msg.empty())
             getline(presetAds, paid);
-        else
+        else{
+            presetAds.close();
             return -1;
+        }
         if(!paid.empty()){
-            if(!(paidInt = stoi(paid)))
+            if(!(paidInt = stoi(paid))){
+                presetAds.close();
                 return -1;
             }
+        }
         else{
-            cout << "check" << endl;
+            presetAds.close();
             return -1;
         }
         if(adLength(msg)){

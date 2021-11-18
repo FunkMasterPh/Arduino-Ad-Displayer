@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ad_class.hpp"
 #include "ad_functions.hpp"
+#include "serial_port_class.hpp"
 
 void fillVector(vector<Ad>& newAdList){
     string name;
@@ -34,4 +35,10 @@ void printVector(vector<Ad>& newAdList){
 
 bool adLength(string msg){
     return msg.length() <= 25;
+}
+
+void writeToScreen(vector<Ad>& newAdList, vector<SerialPort>& newArduinos){
+    int ardSize = newArduinos.size();
+    for(int i = 0; i < ardSize; i++)
+        newArduinos[i].sendAd(newAdList);
 }

@@ -2,6 +2,7 @@
 #define SERIAL_PORT_CLASS_H
 
 #include <iostream>
+#include <fstream>
 #include "ad_class.hpp"
 
 using namespace std;

@@ -28,6 +28,6 @@ void SerialPort::sendAd(vector<Ad>& newAdList){
 }
 
 SerialPort::~SerialPort(){
-    cout << "Destructor called" << endl;
+    sp.close();
 }
 

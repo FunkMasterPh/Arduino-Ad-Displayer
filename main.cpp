@@ -1,6 +1,5 @@
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include <string>
 #include <fcntl.h> 
 #include <errno.h> 
 #include <termios.h> 
@@ -12,6 +11,7 @@
 #include "time_distribution.hpp"
 #include "ad_functions.hpp"
 #include "serial_port_class.hpp"
+#include "file_handling.hpp"
 
 using namespace std;
 
@@ -24,31 +24,17 @@ int main(int argc, char **argv){
         cout << "Not enough arguments." << endl;
         return -1;
     }
-    ofstream serial_port;
-    for(int i = 1; i < argc; i++) {
-        serial_port.open(argv[i]);
-        if(!serial_port) {
-            cout << "Failed to connect to " << argv[1] << errno 
-            << " - "<< strerror(errno) << endl;
-            return -1; 
-        }
-        serial_port.close();
-    }
-    for(int i = 1; i < argc; i++){
-        SerialPort sp(argv[i]);
-        arduinos.push_back(sp);
-    }
 
-    
+    fileParsing(argc, argv, adList, arduinos);
 
     while(1){
         int choice;
         cout << "**************************" << endl;
         cout << "* 1) Add advertisement    " << endl;
-        cout << "* 2) Add ads from file    " << endl;
-        cout << "* 3) List advertisements  " << endl;
-        cout << "* 4) Calculate time dist  " << endl;
-        cout << "* 5) Display Ads          " << endl;
+        cout << "* 2) List advertisements  " << endl;
+        cout << "* 3) Calculate time dist  " << endl;
+        cout << "* 4) Display Ads          " << endl;
+        cout << "* 5) Quit                 " << endl;
         cout << "**************************" << endl;
 
         cin >> choice;
@@ -57,21 +43,17 @@ int main(int argc, char **argv){
             case 1:
                 fillVector(adList);
                 break;
-            case 2:
-                readFromFile(adList);
-                break;
-            case 3: 
+            case 2: 
                 printVector(adList);
                 break;
-            case 4: 
+            case 3: 
                 timeDist(adList);
                 break;
-            case 5:{
-                int ardSize = arduinos.size();
-                for(int i = 0; i < ardSize; i++)
-                    arduinos[i].sendAd(adList);
-                break;
-            }     
+            case 4:
+                writeToScreen(adList, arduinos);
+                break; 
+            case 5:
+                exit(1);
             default:
                 cout << "Invalid input." << endl;
                 break;
