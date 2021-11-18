@@ -38,9 +38,6 @@ int main(int argc, char **argv){
         SerialPort sp(argv[i]);
         arduinos.push_back(sp);
     }
-    for(int i = 0; i < arduinos.size(); i++){
-        cout << arduinos[i].getPort() << endl;
-    }
 
     while(1){
         int choice;
@@ -70,7 +67,6 @@ int main(int argc, char **argv){
             case 5:{
                 int ardSize = arduinos.size();
                 for(int i = 0; i < ardSize; i++)
-                    
                     arduinos[i].sendAd(adList);
                 break;
             }     

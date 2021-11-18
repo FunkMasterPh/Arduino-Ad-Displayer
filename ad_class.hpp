@@ -13,31 +13,19 @@ class Ad{
         float adTime;
 
     public:
-        Ad(string _name, string _message, int _paid){
-            name = _name;
-            message = _message;
-            paid = _paid;
-        }
-        string getMsg(){
-            return message;
-        }
+        Ad(string _name, string _message, int _paid);
 
-        string getName(){
-            return name;
-        }
+        string getMsg();
+
+        string getName();
         
-        int getPaid(){
-            return paid;
-        }
-        float getAdTime(){
-            return adTime;
-        }
-        void setAdTime(float _time){
-            adTime = _time;
-        }
-        ~Ad(){
-            cout << "Calling destructor" << endl;
-        }
+        int getPaid();
+
+        float getAdTime();
+
+        void setAdTime(float _time);
+
+        ~Ad();
 };
 
 #endif

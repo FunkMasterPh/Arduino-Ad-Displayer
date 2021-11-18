@@ -2,10 +2,7 @@
 #define SERIAL_PORT_CLASS_H
 
 #include <iostream>
-#include <fstream>
-#include <exception>
-#include <algorithm>
-#include <random>
+#include "ad_class.hpp"
 
 using namespace std;
 
@@ -15,43 +12,14 @@ class SerialPort{
     ofstream sp;
 
     public:
-    SerialPort(string _serial_port){
-        serial_port = _serial_port;
-        sp.open(serial_port);
-    }
-
-    SerialPort(const SerialPort &other){
-        serial_port = other.serial_port;
-        sp.open(serial_port);
-    }
+    SerialPort(string _serial_port);
     
-    string getPort(){
-        return serial_port;
-    }
+    SerialPort(const SerialPort &other);
 
-    void sendAd(vector<Ad>& newAdList){
-        int adSize = newAdList.size();
-        /* random_device rd;
-        default_random_engine gen(rd); */
-        shuffle(newAdList.begin(), newAdList.end(), default_random_engine());
-        for(int i = 0; i < adSize; i++){
-            sp << newAdList[i].getMsg() << "," << newAdList[i].getAdTime()<< "|";
-        }
-        sp.close();
-    }
+    void sendAd(vector<Ad>& newAdList);
 
-    ~SerialPort(){
-        cout << "Destructor called" << endl;
-    }
-
+    ~SerialPort();
 
 };
-
-
-
-
-
-
-
 
 #endif
