@@ -39,6 +39,8 @@ int main(int argc, char **argv){
         arduinos.push_back(sp);
     }
 
+    
+
     while(1){
         int choice;
         cout << "**************************" << endl;

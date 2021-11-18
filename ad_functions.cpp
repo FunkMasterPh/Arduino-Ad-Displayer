@@ -31,3 +31,7 @@ void printVector(vector<Ad>& newAdList){
         cout << "Company Ad Time: " << newAdList[i].getAdTime() << endl;
     }
 }
+
+bool adLength(string msg){
+    return msg.length() <= 25;
+}

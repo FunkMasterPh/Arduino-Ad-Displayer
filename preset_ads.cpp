@@ -3,25 +3,46 @@
 #include <vector>
 #include "preset_ads.hpp"
 #include "ad_class.hpp"
+#include "ad_functions.hpp"
 
 using namespace std;
 
-void readFromFile(vector<Ad>& newAdList){
+int readFromFile(vector<Ad>& newAdList){
     string cmpName;
     string msg;
     string paid;
+    int paidInt;
     fstream presetAds;
     presetAds.open("preset_ads.txt", ios::in);
         if(!presetAds){
-            cout << "No such file." << endl;
+            return -1;
         }
     while(!presetAds.eof()){
         getline(presetAds, cmpName);
-        getline(presetAds, msg);
-        getline(presetAds, paid);
-        int paidInt = stoi(paid);
-        Ad newAd(cmpName, msg, paidInt);
-        newAdList.push_back(newAd);
+        if(!cmpName.empty())
+            getline(presetAds, msg);
+        else 
+            return -1;
+        if(!msg.empty())
+            getline(presetAds, paid);
+        else
+            return -1;
+        if(!paid.empty()){
+            if(!(paidInt = stoi(paid)))
+                return -1;
+            }
+        else{
+            cout << "check" << endl;
+            return -1;
+        }
+        if(adLength(msg)){
+            Ad newAd(cmpName, msg, paidInt);
+            newAdList.push_back(newAd);
+        }else{
+            cout << "Skipped entry due to messeage exceeding maximum length." << endl;
+        }
     }
     presetAds.close();
+    return 1;
 }
+

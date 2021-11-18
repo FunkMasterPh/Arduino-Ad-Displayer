@@ -3,9 +3,8 @@
 
 #include "ad_class.hpp"
 
-void readFromFile(vector<Ad>&);
+int readFromFile(vector<Ad>&);
 
-
-
+bool adLength(string msg);
 
 #endif
