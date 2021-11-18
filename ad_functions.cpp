@@ -3,23 +3,39 @@
 #include "ad_class.hpp"
 #include "ad_functions.hpp"
 #include "serial_port_class.hpp"
+#include "time_distribution.hpp"
 
-void fillVector(vector<Ad>& newAdList){
+int fillVector(vector<Ad>& newAdList){
     string name;
     string msg;
-    int paid;
+    string paid_s;
+    double paid;
 
     while((getchar()) != '\n');
     cout << "Enter company name: " << endl;
     getline(cin, name);
+    if(name.empty())
+        return 0;
     cout << "Enter message: " << endl;
     getline(cin, msg);
+    if(msg.empty())
+        return 0;
+    if(!adLength(msg)){
+        return 0;
+    }
     cout << "Add money: " << endl;
-    cin >> paid;
-
+    getline(cin, paid_s);
+    if(paid_s.empty())
+       return 0;
+    try{
+        paid = stod(paid_s);
+    }
+    catch(exception &err){
+        return 0;
+    }
     Ad newAd(name, msg, paid);
     newAdList.push_back(newAd);
-
+    return 1;
 }
 
 void printVector(vector<Ad>& newAdList){

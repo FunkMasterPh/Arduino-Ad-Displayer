@@ -1,7 +1,5 @@
 error-handling 
 
-ta in fil som arg i compile-time
-
-göra funktioner av kod i main 
+slänga in main menu i en funktion
 
 i mån av tid, få till threads
