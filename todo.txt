@@ -1,5 +1,0 @@
-error-handling 
-
-slänga in main menu i en funktion
-
-i mån av tid, få till threads

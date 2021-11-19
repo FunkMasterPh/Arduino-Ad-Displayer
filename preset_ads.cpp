@@ -7,6 +7,8 @@
 
 using namespace std;
 
+/*Reads company name, message and offer, 
+  creates an object that gets added to AdList vector */
 int readFromFile(vector<Ad>& newAdList, string file){
     string cmpName;
     string msg;

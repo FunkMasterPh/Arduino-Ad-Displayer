@@ -23,6 +23,7 @@ int main(int argc, char **argv){
 
     if(!fileParsing(argc, argv, adList, arduinos))
         return -1;
+        
     timeDist(adList);
 
     mainMenu(adList, arduinos);

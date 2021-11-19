@@ -4,6 +4,8 @@
 #include "ad_functions.hpp"
 #include "serial_port_class.hpp"
 
+/*Takes user input to create Ad object and adds it to the vector 'newAdList',
+  Makes sure user doesn't leave required field empty.*/
 int fillVector(vector<Ad>& newAdList){
     string name;
     string msg;

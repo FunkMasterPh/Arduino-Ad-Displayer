@@ -6,12 +6,16 @@
 
 using namespace std;
 
-int fileParsing(int argc, char** argv, vector<Ad>& adList, vector<SerialPort>& arduinos){
+int fileParsing(int argc, char** argv, vector<Ad>& adList, 
+                vector<SerialPort>& arduinos){
     for(int i = 1; i < argc; i++){
         string file = argv[i];
         ofstream serial_port;
+        //Looks for file containing ad-info and reads the info 
         if(file.substr(file.find_last_of(".") + 1) == "txt")
             readFromFile(adList, file);
+        /*Checks if serial port exists, if it does, 
+        create an object and add it to arduinos vector*/
         else if(FILE *f = fopen(file.c_str(), "r")){
             serial_port.open(argv[i]);
             if(!serial_port){
