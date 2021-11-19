@@ -12,10 +12,10 @@ void mainMenu(vector<Ad>& newAdList, vector<SerialPort>& newArduinos){
     while(1){
         char choice;
         cout << "**************************" << endl;
-        cout << "* 1) Add advertisement    " << endl;
-        cout << "* 2) List advertisements  " << endl;
+        cout << "* 1) Add Ads              " << endl;
+        cout << "* 2) List Ads             " << endl;
         cout << "* 3) Display Ads          " << endl;
-        cout << "* 4) Quit                 " << endl;
+        cout << "* 4) Exit                 " << endl;
         cout << "**************************" << endl;
 
         cin >> choice;
