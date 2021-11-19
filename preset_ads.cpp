@@ -48,7 +48,7 @@ int readFromFile(vector<Ad>& newAdList, string file){
             Ad newAd(cmpName, msg, paidInt);
             newAdList.push_back(newAd);
         }else{
-            cout << "Skipped entry due to messeage exceeding maximum length." << endl;
+            cout << "Skipped entry due to message exceeding maximum length." << endl;
         }
     }
     presetAds.close();
