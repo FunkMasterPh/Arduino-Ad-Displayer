@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-//#include <exception>
 #include <algorithm>
 #include <random>
 #include "serial_port_class.hpp"

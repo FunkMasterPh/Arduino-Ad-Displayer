@@ -3,13 +3,12 @@
 #include "ad_class.hpp"
 #include "ad_functions.hpp"
 #include "serial_port_class.hpp"
-#include "time_distribution.hpp"
 
 int fillVector(vector<Ad>& newAdList){
     string name;
     string msg;
     string paid_s;
-    double paid;
+    float paid;
 
     while((getchar()) != '\n');
     cout << "Enter company name: " << endl;

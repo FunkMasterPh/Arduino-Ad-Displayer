@@ -13,13 +13,13 @@ class Ad{
         float adTime;
 
     public:
-        Ad(string _name, string _message, double _paid);
+        Ad(string _name, string _message, float _paid);
 
         string getMsg();
 
         string getName();
         
-        double getPaid();
+        float getPaid();
 
         float getAdTime();
 

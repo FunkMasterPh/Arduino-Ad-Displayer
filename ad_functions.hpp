@@ -4,12 +4,9 @@
 #include "ad_class.hpp"
 #include "serial_port_class.hpp"
 
-
-
 int fillVector(vector<Ad>& newAdList);
 void printVector(vector<Ad>& newAdList);
 void writeToScreen(vector<Ad>& newAdList, vector<SerialPort>& newArduinos);
 bool adLength(string msg);
-
 
 #endif

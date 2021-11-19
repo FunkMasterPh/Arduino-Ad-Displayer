@@ -4,7 +4,6 @@
 #include "ad_class.hpp"
 
 int readFromFile(vector<Ad>&, string file);
-
 bool adLength(string msg);
 
 #endif

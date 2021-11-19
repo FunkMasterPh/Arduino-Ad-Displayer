@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Ad::Ad(string _name, string _message, double _paid){
+Ad::Ad(string _name, string _message, float _paid){
     name = _name;
     message = _message;
     paid = _paid;
@@ -16,7 +16,7 @@ string Ad::getName(){
     return name;
 }
 
-double Ad::getPaid(){
+float Ad::getPaid(){
     return paid;
 }
 float Ad::getAdTime(){
