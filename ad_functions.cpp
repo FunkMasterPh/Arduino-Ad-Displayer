@@ -50,7 +50,7 @@ void printVector(vector<Ad>& newAdList){
     }
 }
 
-bool adLength(string msg){
+bool adLength(const string msg){
     return msg.length() <= 25;
 }
 

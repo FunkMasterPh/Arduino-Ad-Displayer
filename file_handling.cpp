@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int fileParsing(int argc, char** argv, vector<Ad>& adList, 
+int fileParsing(const int argc, char** argv, vector<Ad>& adList, 
                 vector<SerialPort>& arduinos){
     for(int i = 1; i < argc; i++){
         string file = argv[i];

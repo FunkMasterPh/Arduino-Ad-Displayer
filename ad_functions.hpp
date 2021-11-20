@@ -7,6 +7,6 @@
 int fillVector(vector<Ad>& newAdList);
 void printVector(vector<Ad>& newAdList);
 void writeToScreen(vector<Ad>& newAdList, vector<SerialPort>& newArduinos);
-bool adLength(string msg);
+bool adLength(const string msg);
 
 #endif

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int fileParsing(int argc, char** argv, vector<Ad>& adList, vector<SerialPort>& arduinos);
+int fileParsing(const int argc, char** argv, vector<Ad>& adList, vector<SerialPort>& arduinos);
 
 
 #endif
